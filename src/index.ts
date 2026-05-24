@@ -20,10 +20,12 @@ interface CliOptions {
   height?: number;
   duration?: number;
   fps?: number;
+  backgroundColor?: string;
   w?: number;
   h?: number;
   d?: number;
   f?: number;
+  'background-color'?: string;
 }
 
 async function main() {
@@ -42,6 +44,7 @@ async function main() {
       console.error('  -h, --height <pixels>    Maximum height (default: from SVG)');
       console.error('  -d, --duration <seconds> Override animation duration');
       console.error('  -f, --fps <number>       Frame rate (default: 30)');
+      console.error('      --background-color   Page background color (default: transparent)');
       console.error("  -v, --version            Show version number");
       console.error('\nExamples:');
       console.error('  svg-video input.svg output.mp4');
@@ -59,6 +62,8 @@ async function main() {
     const height = options.height ?? options.h;
     const duration = options.duration ?? options.d;
     const fps = options.fps ?? options.f ?? 30;
+    const backgroundColor =
+      options.backgroundColor ?? options['background-color'];
 
     // Validate input file exists
     if (!(await fileExists(inputPath))) {
@@ -131,6 +136,7 @@ async function main() {
         svgPath: inputPath,
         width: finalWidth,
         height: finalHeight,
+        backgroundColor,
       },
       tempHtmlPath
     );

@@ -6,6 +6,7 @@ export interface TemplateData {
   svgPath: string;
   width: number;
   height: number;
+  backgroundColor?: string;
 }
 
 // Embedded template
@@ -21,7 +22,10 @@ const TEMPLATE = `<!DOCTYPE html>
       width: {{width}}px;
       height: {{height}}px;
       overflow: hidden;
-      background: transparent;
+      background: {{backgroundColor}};
+    }
+    html {
+      background: {{backgroundColor}};
     }
     img {
       max-width: {{width}}px;
@@ -47,6 +51,7 @@ export async function generateHTML(data: TemplateData): Promise<string> {
     svgPath: resolve(data.svgPath),
     width: data.width,
     height: data.height,
+    backgroundColor: data.backgroundColor ?? 'transparent',
   });
 
   return htmlContent;

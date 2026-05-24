@@ -77,6 +77,9 @@ svg-video input.svg output.mp4 -d 5
 # Set custom frame rate
 svg-video input.svg output.mp4 -f 60
 
+# Set the page background color
+svg-video input.svg output.mp4 --background-color white
+
 # Combine options
 svg-video input.svg output.mp4 -w 1280 -h 720 -d 10 -f 30
 ```
@@ -87,6 +90,7 @@ svg-video input.svg output.mp4 -w 1280 -h 720 -d 10 -f 30
 - `-h, --height <pixels>`    - Maximum height of the output video (default: from SVG)
 - `-d, --duration <seconds>` - Override animation duration (optional for infinite loops with detectable duration)
 - `-f, --fps <number>`       - Frame rate (default: 30)
+- `--background-color <color>` - Page background color (default: transparent)
 - `-v, --version`            - show version number
 
 ## Supported Animation Types
