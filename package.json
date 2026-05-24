@@ -1,6 +1,6 @@
 {
   "name": "svg-video",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Convert SVG animation into mp4 video",
   "main": "./bin/index.js",
   "type": "module",
@@ -12,6 +12,7 @@
   },
   "scripts": {
     "build": "vite build",
+    "postbuild": "chmod +x bin/index.js",
     "test": "vitest",
     "dev": "ts-node src/index.ts",
     "docker:build": "docker build -t svg-video .",

@@ -24,8 +24,10 @@ export async function recordAnimation(
 
   try {
     // Launch browser
+    console.log('Launching browser...');
     browser = await puppeteer.launch({
       headless: true,
+      dumpio: true,
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
@@ -35,6 +37,7 @@ export async function recordAnimation(
     });
 
     page = await browser.newPage();
+    console.log('Browser ready.');
 
     // Set viewport size
     await page.setViewport({
@@ -54,18 +57,21 @@ export async function recordAnimation(
     });
 
     // Navigate to HTML page
+    console.log('Opening render page...');
     await page.goto(`file://${htmlPath}`, {
       waitUntil: 'networkidle0',
       timeout: 30000,
     });
 
     // Wait for image to load
+    console.log('Waiting for SVG to load...');
     await page.waitForSelector('img', { timeout: 10000 });
     
     // Give extra time for SVG to fully initialize
     await page.waitForTimeout(500);
 
     // Start recording
+    console.log('Starting capture...');
     await recorder.start(outputPath);
 
     // Wait for animation duration with progress updates
